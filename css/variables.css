@@ -1,0 +1,26 @@
+:root{
+  /* Palette: Tierra (neutros cálidos) */
+  --color-bg: #f5efe6; /* beige */
+  --color-surface: #fffaf6; /* arena */
+  --color-muted: #8b6f5b; /* marrón claro */
+  --color-accent: #b86b4a; /* terracota suave */
+  --color-ink: #2f2a28; /* gris cálido / alto contraste */
+
+  /* Spacings */
+  --space-xs: 6px;
+  --space-sm: 12px;
+  --space-md: 20px;
+  --space-lg: 32px;
+  --space-xl: 56px;
+
+  /* Type scale */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --font-heading: 'Georgia', serif;
+  --fs-base: 16px;
+  --fw-regular: 400;
+  --fw-medium: 600;
+
+  /* Layout */
+  --container-max: 1100px;
+  --radius: 8px;
+}

@@ -1,0 +1,4 @@
+.photos .grid{grid-auto-rows:1fr}
+.photos .card{overflow:hidden;border-radius:10px}
+.photos .card img{transition:transform .6s ease}
+.photos .card:hover img{transform:scale(1.03)}

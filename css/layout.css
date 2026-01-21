@@ -1,0 +1,15 @@
+/* Layout and containers */
+.site-header{position:sticky;top:0;background:transparent;padding:12px 0;z-index:20}
+.nav{display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:700;color:var(--color-ink)}
+
+.site-main{min-height:calc(100vh - 120px)}
+.site-footer{padding:20px 0;text-align:center;color:var(--color-muted);font-size:0.9rem}
+
+/* Responsive container for two-column areas */
+.about-inner{display:grid;grid-template-columns:1fr;gap:var(--space-md);align-items:center}
+
+@media(min-width:900px){
+  .about-inner{grid-template-columns:360px 1fr}
+  .grid-vertical{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+}

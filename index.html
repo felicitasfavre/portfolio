@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Felicitas Favre — Portfolio</title>
+  <meta name="description" content="Felicitas Favre — Artista digital. Audiovisual, fotografía vertical, dirección de arte." />
+
+  <!-- Styles: variables first so other files can use them -->
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/sections/hero.css">
+  <link rel="stylesheet" href="css/sections/about.css">
+  <link rel="stylesheet" href="css/sections/videos.css">
+  <link rel="stylesheet" href="css/sections/photos.css">
+  <link rel="stylesheet" href="css/sections/services.css">
+  <link rel="stylesheet" href="css/sections/contact.css">
+
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="logo" href="#hero">Felicitas Favre</a>
+      <a class="cta" href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main" class="site-main">
+
+    <!-- HERO -->
+    <section id="hero" class="section hero" data-section="hero" data-enabled>
+      <div class="hero-inner container">
+        <h1 class="hero-title" id="hero-name">Felicitas Favre</h1>
+        <p class="hero-claim" id="hero-claim">Artista digital — Dirección de arte & Contenido audiovisual</p>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section about" data-section="about" data-enabled>
+      <div class="container about-inner">
+        <figure class="about-media" id="about-media">
+          <img src="assets/img/about-vertical.jpg" alt="Felicitas Favre" loading="lazy">
+        </figure>
+        <div class="about-copy">
+          <h2>Sobre mí</h2>
+          <p id="about-text">Artista digital y creadora de contenido con sensibilidad editorial. Especializada en video vertical, fotografía, iluminación y dirección creativa. Trabajo con marcas, productoras y equipos creativos para producir piezas con criterio estético y técnica.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO WORK -->
+    <section id="videos" class="section videos" data-section="videos" data-enabled>
+      <div class="container">
+        <h2>Video Work</h2>
+        <p class="hint">Grid pensado para reels / vertical videos. Reemplaza thumbnails en <code>js/data.js</code>.</p>
+        <div id="videos-grid" class="grid grid-vertical"></div>
+      </div>
+    </section>
+
+    <!-- PHOTOGRAPHY -->
+    <section id="photos" class="section photos" data-section="photos" data-enabled>
+      <div class="container">
+        <h2>Photography</h2>
+        <div id="photos-grid" class="grid grid-vertical"></div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="section services" data-section="services" data-enabled>
+      <div class="container">
+        <h2>Services</h2>
+        <div id="services-grid" class="services-grid"></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section contact" data-section="contact" data-enabled>
+      <div class="container contact-inner">
+        <h2>Contacto</h2>
+        <p>¿Trabajamos juntos? Escribime o mandame un mensaje directo en Instagram.</p>
+        <div class="contact-actions">
+          <a id="instagram-link" class="btn btn-primary" href="#">Instagram</a>
+          <a id="email-link" class="btn" href="#">Email</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© <span id="year"></span> Felicitas Favre</div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/animations.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

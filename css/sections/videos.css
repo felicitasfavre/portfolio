@@ -1,0 +1,4 @@
+.videos .grid{grid-auto-rows:1fr}
+.videos .card{border-radius:10px;overflow:hidden}
+.videos video{width:100%;height:100%;display:block}
+.videos .thumbnail{background:#eee;display:flex;align-items:center;justify-content:center;color:var(--color-muted);padding:20px}

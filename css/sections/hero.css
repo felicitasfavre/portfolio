@@ -1,0 +1,9 @@
+.hero{display:flex;align-items:center;min-height:68vh;padding-top:48px;background:linear-gradient(180deg,var(--color-bg),var(--color-surface))}
+.hero-inner{max-width:900px}
+.hero-title{font-size:2rem;letter-spacing:0.02em;color:var(--color-ink)}
+.hero-claim{font-size:1rem;color:var(--color-muted);margin-top:12px}
+
+@media(min-width:900px){
+  .hero-title{font-size:3.2rem}
+  .hero-claim{font-size:1.25rem}
+}

@@ -1,0 +1,2 @@
+.contact-inner{display:grid;gap:var(--space-md);align-items:center}
+.contact-actions{display:flex;gap:var(--space-sm);flex-wrap:wrap}

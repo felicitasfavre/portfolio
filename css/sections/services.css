@@ -1,0 +1,7 @@
+.services-grid{display:grid;gap:var(--space-md)}
+.services-card h3{margin:0 0 var(--space-xs);font-size:1.05rem}
+.services-card p{color:var(--color-muted);margin:0}
+
+@media(min-width:900px){
+  .services-grid{grid-template-columns:repeat(3,1fr)}
+}
