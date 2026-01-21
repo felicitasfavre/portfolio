@@ -2,3 +2,20 @@
 .photos .card{overflow:hidden;border-radius:10px}
 .photos .card img{transition:transform .6s ease}
 .photos .card:hover img{transform:scale(1.03)}
+
+/* Carousel styles */
+.photos .carousel{position:relative;display:flex;align-items:center}
+.photos .carousel-viewport{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;width:100%;padding:8px 0}
+.photos .carousel-track{display:flex;gap:12px}
+.photos .carousel .card{flex:0 0 80%;scroll-snap-align:center}
+
+@media(min-width:700px){
+	.photos .carousel .card{flex:0 0 45%}
+}
+@media(min-width:1024px){
+	.photos .carousel .card{flex:0 0 30%}
+}
+
+.photos .carousel-btn{position:relative;z-index:4;border:0;background:transparent;font-size:28px;padding:8px 12px;cursor:pointer}
+.photos .carousel-btn:focus{outline:2px solid var(--color-accent)}
+

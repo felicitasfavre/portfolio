@@ -25,9 +25,9 @@ window.PORTFOLIO_DATA = {
   ],
   videos: [
     /* Añadir objetos con {title, poster, src} - src opcional para integrar videos locales */
-    {title: 'Reel 1', poster: 'assets/img/video-thumb-1.jpg', src: 'https://drive.google.com/uc?export=download&id=1mB9wzHQfF1zrHNbsGN0RlgCiym9LhqjB'},
-    {title: 'Reel 2', poster: 'assets/img/video-thumb-2.jpg', src: 'https://drive.google.com/uc?export=download&id=1I5Y0oLbxeJNgWGhvFQ024a8nUxj77Sim'},
-    {title: 'Reel 3', poster: 'assets/img/video-thumb-3.jpg', src: 'https://drive.google.com/uc?export=download&id=1dSvTkHl2ai6XLNT59T6bXZacwLQMJN4R'}
+    {title: 'Reel 1', poster: 'assets/img/video-thumb-1.jpg', src: 'https://youtube.com/shorts/HtvjgFa0vdI'},
+    {title: 'Reel 2', poster: 'assets/img/video-thumb-2.jpg', src: 'https://youtube.com/shorts/sS6hOx3NScU'},
+    {title: 'Reel 3', poster: 'assets/img/video-thumb-3.jpg', src: 'https://youtube.com/shorts/A_XDtqMoQdk'}
   ],
   photos: [
     {title: 'Editorial 1', src: 'assets/img/photo-1.jpg'},
