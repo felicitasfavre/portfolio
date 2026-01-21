@@ -19,4 +19,4 @@ dist/
 build/
 
 # Media (videos often large) - remove if you want to version videos
-assets/video/
+# assets/video/

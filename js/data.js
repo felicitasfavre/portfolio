@@ -12,8 +12,8 @@ window.PORTFOLIO_DATA = {
     image: 'assets/img/about-vertical.jpg'
   },
   contact: {
-    instagram: 'https://instagram.com/tu_usuario',
-    email: 'mailto:tu@correo.com'
+    instagram: 'https://instagram.com/felicitasfavre',
+    email: 'felicitasfavre@gmail.com'
   },
   sections: [
     {id: 'hero', enabled: true},
