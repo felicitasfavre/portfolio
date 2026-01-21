@@ -92,72 +92,92 @@
   }
 
   // Initialize carousel controls (prev/next + keyboard focus)
-  function initCarousels(){
-    const carousels = $all('.carousel');
-    carousels.forEach(c => {
-      c.setAttribute('tabindex', '0');
-      const vp = c.querySelector('.carousel-viewport');
-      const btnPrev = c.querySelector('.carousel-btn.prev');
-      const btnNext = c.querySelector('.carousel-btn.next');
-      if(!vp) return;
-      btnPrev && btnPrev.addEventListener('click', ()=>{
-        vp.scrollBy({left: -Math.round(vp.clientWidth * 0.9), behavior: 'smooth'});
-      });
-      btnNext && btnNext.addEventListener('click', ()=>{
-        vp.scrollBy({left: Math.round(vp.clientWidth * 0.9), behavior: 'smooth'});
-      });
-      // keyboard navigation when carousel has focus
-      c.addEventListener('keydown', (e)=>{
-        if(e.key === 'ArrowLeft') btnPrev && btnPrev.click();
-        if(e.key === 'ArrowRight') btnNext && btnNext.click();
-      });
+ function initCarousels(){
+  const carousels = $all('.carousel');
+  carousels.forEach(c => {
+    c.setAttribute('tabindex', '0');
+    const vp = c.querySelector('.carousel-viewport');
+    const track = c.querySelector('.carousel-track');
+    const btnPrev = c.querySelector('.carousel-btn.prev');
+    const btnNext = c.querySelector('.carousel-btn.next');
+    if(!vp) return;
+    btnPrev && btnPrev.addEventListener('click', ()=>{ vp.scrollBy({left: -Math.round(vp.clientWidth * 0.9), behavior: 'smooth'}); });
+    btnNext && btnNext.addEventListener('click', ()=>{ vp.scrollBy({left: Math.round(vp.clientWidth * 0.9), behavior: 'smooth'}); });
+    c.addEventListener('keydown', (e)=>{ if(e.key === 'ArrowLeft') btnPrev && btnPrev.click(); if(e.key === 'ArrowRight') btnNext && btnNext.click(); });
 
-      // click on a card opens modal with sound
-      c.querySelectorAll('.card').forEach(card => {
-        card.style.cursor = 'pointer';
-        card.addEventListener('click', (ev)=>{
-          ev.preventDefault();
-          const src = card.getAttribute('data-src');
-          const type = card.getAttribute('data-type');
-          if(!src) return;
-          openVideoModal(src, type);
-        });
+    // active card sync (centra la tarjeta y le aplica .is-active)
+    function updateActive(){
+      const cards = Array.from(c.querySelectorAll('.card'));
+      if(!cards.length) return;
+      const center = vp.scrollLeft + vp.clientWidth/2;
+      let closest = null; let minDist = Infinity;
+      const trackRect = track.getBoundingClientRect();
+      cards.forEach(card => {
+        const rect = card.getBoundingClientRect();
+        // card center relative to scrollLeft space:
+        const cardCenter = (rect.left - trackRect.left) + rect.width/2 + vp.scrollLeft;
+        const d = Math.abs(center - cardCenter);
+        if(d < minDist){ minDist = d; closest = card; }
+      });
+      cards.forEach(card => card.classList.toggle('is-active', card === closest));
+    }
+    let scTimer = null;
+    vp.addEventListener('scroll', ()=>{ if(scTimer) clearTimeout(scTimer); scTimer = setTimeout(updateActive, 80); });
+    // inicial
+    setTimeout(updateActive, 120);
+
+    // click on a card opens modal with sound
+    c.querySelectorAll('.card').forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', (ev)=>{
+        ev.preventDefault();
+        const src = card.getAttribute('data-src');
+        const type = card.getAttribute('data-type');
+        if(!src) return;
+        openVideoModal(src, type);
       });
     });
-  }
+  });
+}
 
   // Create and show modal player
   function openVideoModal(src, type){
-    const modal = document.createElement('div'); modal.className = 'video-modal';
-    const inner = document.createElement('div'); inner.className = 'modal-inner';
-    const close = document.createElement('button'); close.className = 'modal-close'; close.setAttribute('aria-label','Cerrar'); close.innerHTML='✕';
-    // build player
-    if(type === 'youtube' || /youtu/.test(src)){
-      const id = (src.split('/').pop() || '').split('?')[0];
-      const iframe = document.createElement('iframe');
-      iframe.setAttribute('allow','autoplay; encrypted-media; fullscreen');
-      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=0&controls=1&rel=0`;
-      iframe.frameBorder = '0';
-      inner.appendChild(iframe);
-    } else {
-      const video = document.createElement('video');
-      video.controls = true; video.autoplay = true; video.playsInline = true; video.src = src; video.style.background = '#000';
-      inner.appendChild(video);
-    }
-    modal.appendChild(inner);
-    modal.appendChild(close);
-    document.body.appendChild(modal);
-    // focus
-    close.focus();
-    function cleanup(){
-      document.body.removeChild(modal);
-      document.removeEventListener('keydown', onKey);
-    }
-    function onKey(e){ if(e.key === 'Escape') cleanup(); }
-    close.addEventListener('click', cleanup);
-    modal.addEventListener('click', (e)=>{ if(e.target === modal) cleanup(); });
-    document.addEventListener('keydown', onKey);
+  // Pausar thumbnails autoplay en la página
+  document.querySelectorAll('.thumb-video').forEach(v=>{ try{ v.pause(); v.currentTime = 0; }catch(e){} });
+
+  const modal = document.createElement('div'); modal.className = 'video-modal';
+  const inner = document.createElement('div'); inner.className = 'modal-inner';
+  const close = document.createElement('button'); close.className = 'modal-close'; close.setAttribute('aria-label','Cerrar'); close.innerHTML='✕';
+
+  if(type === 'youtube' || /youtu/.test(src)){
+    const id = (src.split('/').pop() || '').split('?')[0];
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('allow','autoplay; encrypted-media; fullscreen');
+    iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&mute=0&controls=1&rel=0`;
+    iframe.frameBorder = '0';
+    inner.appendChild(iframe);
+  } else {
+    const video = document.createElement('video');
+    video.controls = true; video.autoplay = true; video.playsInline = true; video.src = src; video.style.background = '#000';
+    inner.appendChild(video);
   }
+
+  modal.appendChild(inner);
+  modal.appendChild(close);
+  document.body.appendChild(modal);
+  close.focus();
+
+  function cleanup(){
+    try{ document.body.removeChild(modal); }catch(e){}
+    document.removeEventListener('keydown', onKey);
+    // reanudar thumbnails (silenciosos)
+    document.querySelectorAll('.thumb-video').forEach(v=>{ try{ v.play(); }catch(e){} });
+  }
+  function onKey(e){ if(e.key === 'Escape') cleanup(); }
+  close.addEventListener('click', cleanup);
+  modal.addEventListener('click', (e)=>{ if(e.target === modal) cleanup(); });
+  document.addEventListener('keydown', onKey);
+}
 
   function applySectionsOrder(data){
     const main = document.getElementById('main');
